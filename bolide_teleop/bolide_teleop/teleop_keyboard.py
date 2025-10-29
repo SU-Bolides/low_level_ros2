@@ -36,6 +36,11 @@ class KeyboardController(Node):
         # init speed and direction
         self.current_speed = 0.0
         self.current_direction = 0.0
+        
+        # Speed and direction increments
+        self.speed_increment = 0.04  # 10% increment per key press
+        self.direction_increment = 0.2  # 20% increment per key press
+        
         self.key_mapping = {
             '\x1b[A': 'UP',     
             '\x1b[B': 'DOWN',
@@ -67,30 +72,54 @@ class KeyboardController(Node):
         """
         mykey = click.getchar()
 
-        action = self.key_mapping[mykey]
+        action = self.key_mapping.get(mykey, '')
 
         if action == '':
-            coeff = 0.0
+            # Unknown key, do nothing
+            return
+            
         if action == 'UP':
-            self.current_speed = 0.056 * coeff
+            # Increment speed (forward)
+            self.current_speed += self.speed_increment * coeff
+            # Clamp to max 1.0
+            if self.current_speed > 1.0:
+                self.current_speed = 1.0
+                
         elif action == 'DOWN':
-            self.current_speed -= 0.05 * coeff
+            # Decrement speed (backward)
+            self.current_speed -= self.speed_increment * coeff
+            # Clamp to min -1.0
+            if self.current_speed < -1.0:
+                self.current_speed = -1.0
+                
         elif action == 'LEFT':
-            if self.current_direction > -1.0:
-                self.current_direction -= 1.0
-            else:
+            # Turn left (negative direction)
+            self.current_direction -= self.direction_increment
+            # Clamp to min -1.0
+            if self.current_direction < -1.0:
                 self.current_direction = -1.0
+                
         elif action == 'RIGHT':
-            if self.current_direction < 1.0:
-                self.current_direction += 1.0
-            else:
+            # Turn right (positive direction)
+            self.current_direction += self.direction_increment
+            # Clamp to max 1.0
+            if self.current_direction > 1.0:
                 self.current_direction = 1.0
+                
         elif action == 'BRAKE':
-            self.current_speed = 2.0
-        elif action == 'QUIT':
-            exit()
-        elif action == 'NEUTRAL':
+            # Stop immediately
             self.current_speed = 0.0
+            
+        elif action == 'QUIT':
+            # Set to neutral before quitting
+            self.current_speed = 0.0
+            self.current_direction = 0.0
+            exit()
+            
+        elif action == 'NEUTRAL':
+            # Reset speed and direction to neutral
+            self.current_speed = 0.0
+            self.current_direction = 0.0
         else:
             self.get_logger().warn(f"Unknown action: {action}")
 
