@@ -9,21 +9,21 @@ import os
 
 def generate_launch_description():
     return LaunchDescription([
-        # Node(
-        #     package='sllidar_ros2',
-        #     executable='sllidar_node',
-        #     name='sllidar_node',
-        #     output='screen',
-        #     parameters=[
-        #         {'serial_port': '/dev/ttyLIDAR'},
-        #         {'serial_baudrate': 256000},
-        #         {'frame_id': 'laser_frame'},
-        #         {'inverted': False},
-        #         {'angle_compensate': True},
-        #         {'scan_mode': 'Express'}
-        #     ],
-        #     respawn=True
-        # ),
+        Node(
+            package='sllidar_ros2',
+            executable='sllidar_node',
+            name='sllidar_node',
+            output='screen',
+            parameters=[
+                {'serial_port': '/dev/ttyLIDAR'},
+                {'serial_baudrate': 256000},
+                {'frame_id': 'laser_frame'},
+                {'inverted': False},
+                {'angle_compensate': True},
+                {'scan_mode': 'Express'}
+            ],
+            respawn=True
+        ),
         Node(
             package='bolide_stm32',
             executable='stm32_node',

@@ -34,7 +34,7 @@ class CommandSpeedNode(Node):
         self.declare_parameter('minimal_speed', 8.3)
         self.debug = self.get_parameter('debug').get_parameter_value().bool_value
         if self.debug:
-            rclpy.logging.set_logger_level('cmd_vel', 10)  # 10 is for DEBUG level
+            rclpy.logging.set_logger_level('cmd_vel_node', 10)  # 10 is for DEBUG level
 
         self.MAXSPEED = 10
         self.MINSPEED = self.get_parameter('minimal_speed').get_parameter_value().double_value
@@ -94,7 +94,8 @@ class CommandSpeedNode(Node):
         #self.get_logger().info(f"speed is :{self.MINSPEED}")
 
     def reverse(self):
-        self.publish_stm32_data(self.REVERSEMAXSPEED)# + self.cmd_velocity * (self.REVERSEMINSPEED - self.REVERSEMAXSPEED))
+        speed_ratio = abs(self.cmd_velocity)
+        self.publish_stm32_data(self.REVERSEMINSPEED + speed_ratio * (self.REVERSEMAXSPEED - self.REVERSEMINSPEED))
 
     def neutral(self):
         self.publish_stm32_data(self.NEUTRAL)
