@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'stm32_node = bolide_stm32.stm32_node:main',
             'cmd_vel_node = bolide_stm32.cmd_vel_node:main',
+            'esc_setup = bolide_stm32.esc_setup:main',
         ],
     },
 )
