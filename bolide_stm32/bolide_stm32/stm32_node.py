@@ -149,6 +149,9 @@ class STM32_Parser(Node):
         """
         self.spi.writebytes(self.tx_buffer)
         data = self.spi.readbytes(20)
+
+        if self.debug:
+            self.get_logger().debug(f"[DEBUG] raw SPI RX: {data}")
         # data = self.spi.xfer2([0x45]*20)  # SPI happens simultaneously, so we need to send to receive.
 
         if not self.crc32mpeg2(data):

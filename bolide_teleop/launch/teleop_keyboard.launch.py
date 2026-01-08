@@ -29,7 +29,10 @@ def generate_launch_description():
             executable='stm32_node',
             name='stm32_node',
             output='screen',
-            respawn=True
+            respawn=True,
+            parameters=[
+                {'debug': True}
+            ]
         ),
         Node(
             package='bolide_stm32',
