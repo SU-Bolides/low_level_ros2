@@ -51,14 +51,19 @@ if you see them, it's all good, else check the connections.
 
 Now on the terminal type to launch the teleoperation :
 ```shell
-ros2 launch bolide_teleop teleop_keyboard.launch
+ros2 launch bolide_teleop teleop_keyboard.launch.py
 ```
 
 You will be able to move the car with the arrows of your keyboard.
 
 If you want to launch the wall follower:
 ```shell
-ros2 launch bolide_wall_follow wall_follow.launch.py
+ros2 launch bolide_wall_follow wall_follow_pid.launch.py
+```
+
+Or the potential_field_navigator :
+```shell
+ros2 launch potential_field_nav potential_field_nav.launch.py
 ```
 For more details please see [this](https://github.com/SU-Bolides/high_level_ros2). (work in progress)
 
