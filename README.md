@@ -135,15 +135,16 @@ To connect to the RPi5 with SSH, you need to know its IP address. To find it you
 ```shell
 hostname -I
 ```
-Make sure that the RPi5 is connected to the network you will use to connect to it. Your computer also need to be on the SAME network for connecting with SSH otherwise it will not work.
-We will try and make the RPi5 become a wifi hotspot so you can connect directly to it without needing to use your phono hotspot.
+It should be `10.42.0.1`.
+The raspberry pi is now a wifi hotspot and you can connect to it :
+The name of the wifi is `bolide1` for the pink car and `bolide2` for the blue car. 
+The password is `setup1234`. The IP adresses are comprised within 10.42.0.0/24.
+
 Once you are connected to the same network as the RPi5, you can connect with SSH with:
 ```shell
-ssh voiture@<IP_ADDRESS>
+ssh voiture@10.42.0.1
 ```
-For the blue car, it's :
-```shell
-ssh voiture2@<IP_ADDRESS>
-```
-For now, the password for the pink car (voiture) is `ros` and for the blue car (voiture2) is `sorbonne2526`. We will try and unify those passwords later. Please DOCUMENT ANY CHANGE MADE !!
-TODO : update this section when the wifi hotspot is working
+Both passwords are `ros`. Please DOCUMENT ANY CHANGE MADE !!
+
+NOTE : YOU ARE NOT CONNECTED TO INTERNET WHEN THE CARS ARE EMETTING THEIR WIFI
+IF YOU NEED TO BE CONNECTED YOU WILL NEED TO CONNECT IT MANUALLY AND IT WILL STOP BEING A HOTSPOT FOR THE DURATION OF THE TIME IT IS ONLINE !!!!!!!!
